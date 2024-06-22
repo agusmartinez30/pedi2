@@ -26,7 +26,7 @@ import { ConfigModule } from '@nestjs/config';
     ReviewsModule, 
     savedPublicationsModule, 
     AuthModule,
-    MongooseModule.forRoot(`mongodb://127.0.0.1:27017/${process.env.DATABASE_NAME}`),
+    MongooseModule.forRoot(`mongodb+srv://${process.env.DATABASE_USER}:${process.env.DATABASE_PASSWORD}@cluster0.ghejr18.mongodb.net/${process.env.DATABASE_NAME}?retryWrites=true&w=majority&appName=Cluster0`),
   ],
   controllers: [AppController],
   providers: [AppService],
