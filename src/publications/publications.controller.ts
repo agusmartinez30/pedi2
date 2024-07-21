@@ -8,31 +8,31 @@ import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 @Controller('Publications')
 export class PublicationsController {
 
-    constructor(private adminService: PublicationsService ) {}
+    constructor(private publicationsService: PublicationsService ) {}
 
     @Get('/')
     getAll(){
-        return this.adminService.getAll()
+        return this.publicationsService.getAll()
     }
 
     @Get(':id')
     async getUser(@Param('id') id: string): Promise<Publication> {
-        return await this.adminService.getById(id);
+        return await this.publicationsService.getById(id);
     }
 
     @Post()
     async createUser(@Body() user: Publication): Promise<Publication> {
-        return await this.adminService.create(user);
+        return await this.publicationsService.create(user);
     }
 
     @Put(':id')
     async updateUser(@Param('id') id: string, @Body() updateUserDto: any): Promise<Publication> {
-      return await this.adminService.update(id, updateUserDto);
+      return await this.publicationsService.update(id, updateUserDto);
     }
 
     @Delete(':id')
     async deleteUser(@Param('id') id: string): Promise<Publication> {
-        return await this.adminService.delete(id);
+        return await this.publicationsService.delete(id);
     }
 
 
