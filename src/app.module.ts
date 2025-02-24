@@ -9,12 +9,10 @@ import { UsersModule } from './users/users.module';
 import { CategoriesModule } from './categories/categories.module';
 import { NotificationsModule } from './notifications/notifications.module';
 import { AuthModule } from './auth/auth.module';
-
 import { ConfigModule } from '@nestjs/config';
 import { ProductsModule } from './products/products.module';
 import { TablesModule } from './tables/tables.module';
 import { OrdersModule } from './orders/orders.module';
-
 
 @Module({
   imports: [
