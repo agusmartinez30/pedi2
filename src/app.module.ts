@@ -13,6 +13,7 @@ import { ConfigModule } from '@nestjs/config';
 import { ProductsModule } from './products/products.module';
 import { TablesModule } from './tables/tables.module';
 import { OrdersModule } from './orders/orders.module';
+import { SubcategoriesModule } from './subcategories/subcategories.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { OrdersModule } from './orders/orders.module';
     ProductsModule,
     TablesModule,
     OrdersModule,
+    SubcategoriesModule,
     MongooseModule.forRoot(`mongodb+srv://${process.env.DATABASE_USER}:${process.env.DATABASE_PASSWORD}@cluster0.ghejr18.mongodb.net/${process.env.DATABASE_NAME}?retryWrites=true&w=majority&appName=Cluster0`),
   ],
   controllers: [AppController],
