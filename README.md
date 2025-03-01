@@ -17,8 +17,8 @@ Asegúrate de tener instalados los siguientes programas:
 
 Primero, clona el repositorio en tu máquina local:
 ```bash
-git clone https://github.com/agusmartinez30/pedly.git
-cd pedly
+git clone https://github.com/agusmartinez30/pedi2.git
+cd pedi2
 ```
 
 ### 2. Instalar dependencias
