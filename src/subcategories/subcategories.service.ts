@@ -36,7 +36,7 @@ export class SubcategoriesService {
     async delete(id: string): Promise<Subcategories> {
         const result = await this.subcategoriesModel.findByIdAndDelete(id).exec();
         if (!result) {
-        throw new NotFoundException('User not found');
+        throw new NotFoundException('User not found!');
         }
         return result;
     }
