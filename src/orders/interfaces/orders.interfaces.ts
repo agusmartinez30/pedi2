@@ -4,7 +4,11 @@ export interface Order {
     readonly total: string;
     readonly user: string;
     readonly table: string;
-    readonly products: string[];
+    readonly products: Array<{
+        product_id: string;
+        quantity: number;
+    }>;
     readonly enabled: boolean;
+    totalAmount?: number; 
     
 }

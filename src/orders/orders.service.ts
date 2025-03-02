@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, HttpException, HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Order } from './interfaces/orders.interfaces';
@@ -24,24 +24,37 @@ export class OrdersService {
         return result;
     }
 
-    async create(order: Order): Promise<Order> {
-        // buscar el producto en el modelos de productos y restar el stock del producto
-        const findProduct = await this.productModel.findById(order.products[0]).exec();
-
-        if(Number(findProduct.stock) < 1){
-            throw new NotFoundException('Not enough stock');    
-        }
-
-        const updatedProduct = await this.productModel.findByIdAndUpdate(
+    async create(order: Order) {
+        let totalAmount: number = 0;
+    
+        for (const product of order.products) {
+          const findProduct = await this.productModel.findById(product.product_id).exec();
+    
+          if (!findProduct) {
+            throw new NotFoundException('Product not found');
+          }
+    
+          if (Number(findProduct.stock) < product.quantity) {
+            throw new BadRequestException(
+              `Not enough stock for product ${findProduct.name}. Available stock: ${findProduct.stock}`,
+            );
+          }
+    
+          const updatedProduct = await this.productModel.findByIdAndUpdate(
             findProduct._id,
-            { $inc: { stock: -1 } },
-            { new: true }
-        ).exec();
-
-        if (!updatedProduct) {
+            { $inc: { stock: -product.quantity } },
+            { new: true },
+          ).exec();
+    
+          if (!updatedProduct) {
             throw new NotFoundException('Product stock could not be updated');
+          }
+    
+          totalAmount += Number(findProduct.price) * product.quantity;
         }
-
+    
+        order.totalAmount = totalAmount;
+    
         const result = new this.orderModel(order);
         return await result.save();
     }
