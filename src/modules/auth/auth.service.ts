@@ -26,7 +26,7 @@ export class AuthService {
         if(!checkPassword) throw new HttpException('PASSWORD_INVALID', 404);
 
         const payload = {id: getUser._id, username: getUser.username};
-        const token = await this.jtwService.sign(payload);
+        const token = this.jtwService.sign(payload);
 
         const data = {
             user: getUser,
