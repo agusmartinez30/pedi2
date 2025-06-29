@@ -4,29 +4,25 @@ import { MongooseModule } from '@nestjs/mongoose';
 // modules
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { AdministratorsModule } from './administrators/administrators.module';
-import { UsersModule } from './users/users.module';
-import { CategoriesModule } from './categories/categories.module';
-import { NotificationsModule } from './notifications/notifications.module';
-import { AuthModule } from './auth/auth.module';
+import { AdministratorsModule } from './modules/administrators/administrators.module';
+import { UsersModule } from './modules/users/users.module';
+import { NotificationsModule } from './modules/notifications/notifications.module';
+import { AuthModule } from './modules/auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
-import { ProductsModule } from './products/products.module';
-import { TablesModule } from './tables/tables.module';
-import { OrdersModule } from './orders/orders.module';
-import { SubcategoriesModule } from './subcategories/subcategories.module';
+import { OrdersModule } from './modules/orders/orders.module';
+import { TravelsModule } from './modules/travels/travels.module';
+import { RatingsModule } from './modules/ratings/ratings.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
     UsersModule, 
     AdministratorsModule, 
-    CategoriesModule, 
     NotificationsModule, 
     AuthModule,
-    ProductsModule,
-    TablesModule,
     OrdersModule,
-    SubcategoriesModule,
+    TravelsModule,
+    RatingsModule,
     MongooseModule.forRoot(`mongodb+srv://${process.env.DATABASE_USER}:${process.env.DATABASE_PASSWORD}@cluster0.ghejr18.mongodb.net/${process.env.DATABASE_NAME}?retryWrites=true&w=majority&appName=Cluster0`),
   ],
   controllers: [AppController],
